@@ -6,6 +6,9 @@ ccflags-y += \
 ccflags-y += \
 	-D__VCCOREVER__=0
 
+ccflags-y += \
+	-Wno-single-bit-bitfield-constant-conversion
+
 vc-sm-cma-$(CONFIG_BCM_VC_SM_CMA) := \
 	vc_sm.o vc_sm_cma_vchi.o
 
