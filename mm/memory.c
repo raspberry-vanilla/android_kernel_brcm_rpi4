@@ -77,6 +77,7 @@
 #include <linux/ptrace.h>
 #include <linux/vmalloc.h>
 #include <linux/sched/sysctl.h>
+#include <linux/set_memory.h>
 
 #include <trace/events/kmem.h>
 
@@ -166,6 +167,7 @@ void mm_trace_rss_stat(struct mm_struct *mm, int member, long count)
 {
 	trace_rss_stat(mm, member, count);
 }
+EXPORT_SYMBOL_GPL(mm_trace_rss_stat);
 
 #if defined(SPLIT_RSS_COUNTING)
 
@@ -5846,3 +5848,13 @@ void ptlock_free(struct page *page)
 	kmem_cache_free(page_ptl_cachep, page->ptl);
 }
 #endif
+
+int set_direct_map_range_uncached(unsigned long addr, unsigned long numpages)
+{
+#ifdef CONFIG_ARM64
+	return arch_set_direct_map_range_uncached(addr, numpages);
+#else
+	return -EOPNOTSUPP;
+#endif
+}
+EXPORT_SYMBOL_GPL(set_direct_map_range_uncached);
