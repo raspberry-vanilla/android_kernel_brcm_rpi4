@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm64 6.1.19 Kernel Configuration
+# Linux/arm64 6.1.20 Kernel Configuration
 #
 CONFIG_CC_VERSION_TEXT="Android (9394278, based on r475365b) clang version 16.0.2 (https://android.googlesource.com/toolchain/llvm-project e1a2893d16330144736de1f4f0d06a844a03b9b0)"
 CONFIG_GCC_VERSION=0
