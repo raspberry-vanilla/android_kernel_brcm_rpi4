@@ -42,7 +42,9 @@
   device_unregister
   _dev_info
   __devm_alloc_percpu
+  devm_bitmap_zalloc
   devm_gen_pool_create
+  devm_gpiod_get_index
   devm_ioremap
   devm_ioremap_wc
   devm_kfree
@@ -55,6 +57,7 @@
   dma_alloc_attrs
   dma_free_attrs
   down_write
+  emergency_restart
   file_ra_state_init
   file_write_and_wait_range
   _find_next_bit
@@ -64,8 +67,11 @@
   free_pages
   free_pages_exact
   generic_file_read_iter
+  generic_mii_ioctl
   generic_perform_write
   generic_write_checks
+  genphy_read_lpa
+  genphy_update_link
   gen_pool_add_owner
   gen_pool_alloc_algo_owner
   gen_pool_destroy
@@ -77,8 +83,10 @@
   get_zeroed_page
   gic_nonsecure_priorities
   gpiochip_find
+  gpiod_cansleep
   gpiod_get_raw_value
   gpio_to_desc
+  i2c_bit_add_numbered_bus
   I_BDEV
   init_task
   init_timer_key
@@ -127,6 +135,9 @@
   memset
   __memset_io
   memstart_addr
+  mii_check_media
+  mii_ethtool_gset
+  mii_nway_restart
   mod_timer
   __msecs_to_jiffies
   msleep
@@ -163,6 +174,8 @@
   param_ops_ullong
   param_set_uint
   __per_cpu_offset
+  phy_resolve_aneg_linkmode
+  phy_start_aneg
   __platform_driver_register
   platform_driver_unregister
   preempt_schedule
@@ -300,8 +313,13 @@
   unregister_restart_handler
   unregister_syscore_ops
   up_write
+  usbnet_get_endpoints
+  usbnet_link_change
   vfree
   vfs_fsync_range
   vmalloc
   vsnprintf
   wake_up_process
+  watchdog_init_timeout
+  watchdog_register_device
+  watchdog_unregister_device
