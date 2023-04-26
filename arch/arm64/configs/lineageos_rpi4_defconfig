@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm64 6.1.23 Kernel Configuration
+# Linux/arm64 6.1.25 Kernel Configuration
 #
 CONFIG_CC_VERSION_TEXT="Android (9796371, based on r487747) clang version 17.0.0 (https://android.googlesource.com/toolchain/llvm-project d9f89f4d16663d5012e5c09495f3b30ece3d2362)"
 CONFIG_GCC_VERSION=0
@@ -619,6 +619,7 @@ CONFIG_KVM_XFER_TO_GUEST_WORK=y
 CONFIG_VIRTUALIZATION=y
 CONFIG_KVM=y
 # CONFIG_NVHE_EL2_DEBUG is not set
+CONFIG_PKVM_MODULE_PATH=""
 
 #
 # General architecture-dependent options
@@ -4030,6 +4031,7 @@ CONFIG_DRM_PANEL_RASPBERRYPI_TOUCHSCREEN=y
 # CONFIG_DRM_PANEL_TPO_TPG110 is not set
 # CONFIG_DRM_PANEL_TRULY_NT35597_WQXGA is not set
 # CONFIG_DRM_PANEL_VISIONOX_RM69299 is not set
+# CONFIG_DRM_PANEL_WAVESHARE_TOUCHSCREEN is not set
 # CONFIG_DRM_PANEL_WIDECHIPS_WS2401 is not set
 # CONFIG_DRM_PANEL_XINPENG_XPP055C272 is not set
 # end of Display Panels
