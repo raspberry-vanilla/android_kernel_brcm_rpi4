@@ -506,6 +506,7 @@ static int __init finalize_pkvm(void)
 	 * at, which would end badly once inaccessible.
 	 */
 	kmemleak_free_part(__hyp_bss_start, __hyp_bss_end - __hyp_bss_start);
+	kmemleak_free_part(__hyp_data_start, __hyp_data_end - __hyp_data_start);
 	kmemleak_free_part_phys(hyp_mem_base, hyp_mem_size);
 
 	ret = pkvm_drop_host_privileges();
@@ -577,26 +578,14 @@ int pkvm_vm_ioctl_enable_cap(struct kvm *kvm, struct kvm_enable_cap *cap)
 #ifdef CONFIG_MODULES
 static char early_pkvm_modules[COMMAND_LINE_SIZE] __initdata;
 
-static int __init pkvm_enable_module_late_loading(void)
-{
-	extern unsigned long kvm_nvhe_sym(pkvm_priv_hcall_limit);
-
-	WARN(1, "Loading pKVM modules with kvm-arm.protected_modules is deprecated\n"
-	     "Use kvm-arm.protected_modules=<module1>,<module2>");
-
-	/*
-	 * Move the limit to allow module loading HVCs. It will be moved back to
-	 * its original position in __pkvm_close_module_registration().
-	 */
-	kvm_nvhe_sym(pkvm_priv_hcall_limit) = __KVM_HOST_SMCCC_FUNC___pkvm_alloc_module_va;
-
-	return 0;
-}
-
 static int __init early_pkvm_modules_cfg(char *arg)
 {
+	/*
+	 * Loading pKVM modules with kvm-arm.protected_modules is deprecated
+	 * Use kvm-arm.protected_modules=<module1>,<module2>
+	 */
 	if (!arg)
-		return pkvm_enable_module_late_loading();
+		return -EINVAL;
 
 	strscpy(early_pkvm_modules, arg, COMMAND_LINE_SIZE);
 
@@ -799,7 +788,8 @@ int __pkvm_load_el2_module(struct module *this, unsigned long *token)
 	int ret, i, secs_first;
 	size_t offset, size;
 
-	if (!is_protected_kvm_enabled())
+	/* The pKVM hyp only allows loading before it is fully initialized */
+	if (!is_protected_kvm_enabled() || is_pkvm_initialized())
 		return -EOPNOTSUPP;
 
 	for (i = 0; i < ARRAY_SIZE(secs_map); i++) {
@@ -844,6 +834,12 @@ int __pkvm_load_el2_module(struct module *this, unsigned long *token)
 	endrel = (void *)mod->relocs + mod->nr_relocs * sizeof(*endrel);
 	kvm_apply_hyp_module_relocations(start, hyp_va, mod->relocs, endrel);
 
+	/*
+	 * Exclude EL2 module sections from kmemleak before making them
+	 * inaccessible.
+	 */
+	kmemleak_free_part(start, size);
+
 	ret = pkvm_map_module_sections(secs_map + secs_first, hyp_va,
 				       ARRAY_SIZE(secs_map) - secs_first);
 	if (ret) {
@@ -863,11 +859,11 @@ int __pkvm_load_el2_module(struct module *this, unsigned long *token)
 
 	return 0;
 }
-EXPORT_SYMBOL_GPL(__pkvm_load_el2_module);
+EXPORT_SYMBOL(__pkvm_load_el2_module);
 
 int __pkvm_register_el2_call(unsigned long hfn_hyp_va)
 {
 	return kvm_call_hyp_nvhe(__pkvm_register_hcall, hfn_hyp_va);
 }
-EXPORT_SYMBOL_GPL(__pkvm_register_el2_call);
+EXPORT_SYMBOL(__pkvm_register_el2_call);
 #endif /* CONFIG_MODULES */
