@@ -3,7 +3,7 @@ KERNEL_DIR=common
 . ${ROOT_DIR}/${KERNEL_DIR}/build.config.aarch64
 
 BRANCH=
-DEFCONFIG=lineageos_rpi4_defconfig
+DEFCONFIG=android_rpi4_defconfig
 
 MAKE_GOALS="
 Image
