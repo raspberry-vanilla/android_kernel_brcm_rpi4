@@ -1913,10 +1913,10 @@ struct xhci_hcd {
 #define XHCI_RESET_TO_DEFAULT	BIT_ULL(44)
 #define XHCI_ZHAOXIN_TRB_FETCH	BIT_ULL(45)
 #define XHCI_ZHAOXIN_HOST	BIT_ULL(46)
-#define XHCI_AVOID_DQ_ON_LINK	BIT_ULL(47)
-#define XHCI_VLI_TRB_CACHE_BUG	BIT_ULL(48)
-#define XHCI_VLI_SS_BULK_OUT_BUG	BIT_ULL(49)
-#define XHCI_VLI_HUB_TT_QUIRK	BIT_ULL(50)
+#define XHCI_AVOID_DQ_ON_LINK	BIT_ULL(56)
+#define XHCI_VLI_SS_BULK_OUT_BUG	BIT_ULL(57)
+#define XHCI_VLI_HUB_TT_QUIRK	BIT_ULL(58)
+#define XHCI_VLI_TRB_CACHE_BUG	BIT_ULL(59)
 
 	unsigned int		num_active_eps;
 	unsigned int		limit_active_eps;

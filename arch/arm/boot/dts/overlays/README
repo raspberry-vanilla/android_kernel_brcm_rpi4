@@ -706,7 +706,8 @@ Params: swap_lr                 Reverse the channel allocation, which will also
                                 nothing on BCM2711 (default off)
         pins_12_13              Select GPIOs 12 & 13 (default)
         pins_18_19              Select GPIOs 18 & 19
-        pins_40_41              Select GPIOs 40 & 41
+        pins_40_41              Select GPIOs 40 & 41 (not available on CM4, used
+                                for other purposes)
         pins_40_45              Select GPIOs 40 & 45 (don't use on BCM2711 - the
                                 pins are on different controllers)
 
@@ -1959,13 +1960,15 @@ Params: abx80x                  Select one of the ABx80x family:
                                 "schottky" (ABx80x and RV1805 only)
 
         trickle-resistor-ohms   Resistor value for trickle charge (DS1339,
-                                ABx80x, RV1805, RV3028)
+                                ABx80x, BQ32000, RV1805, RV3028, RV3032)
+
+        trickle-voltage-mv      Charge pump voltage for trickle charge (RV3032)
 
         wakeup-source           Specify that the RTC can be used as a wakeup
                                 source
 
         backup-switchover-mode  Backup power supply switch mode. Must be 0 for
-                                off or 1 for Vdd < VBackup (RV3028 only)
+                                off or 1 for Vdd < VBackup (RV3028, RV3032)
 
 
 Name:   i2c-rtc-gpio
@@ -2029,13 +2032,15 @@ Params: abx80x                  Select one of the ABx80x family:
                                 "schottky" (ABx80x and RV1805 only)
 
         trickle-resistor-ohms   Resistor value for trickle charge (DS1339,
-                                ABx80x, RV1805, RV3028)
+                                ABx80x, BQ32000, RV1805, RV3028, RV3032)
+
+        trickle-voltage-mv      Charge pump voltage for trickle charge (RV3032)
 
         wakeup-source           Specify that the RTC can be used as a wakeup
                                 source
 
         backup-switchover-mode  Backup power supply switch mode. Must be 0 for
-                                off or 1 for Vdd < VBackup (RV3028 only)
+                                off or 1 for Vdd < VBackup (RV3028, RV3032)
 
         i2c_gpio_sda            GPIO used for I2C data (default "23")
 
