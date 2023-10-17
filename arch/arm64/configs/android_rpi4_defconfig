@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm64 6.1.43 Kernel Configuration
+# Linux/arm64 6.1.53 Kernel Configuration
 #
 CONFIG_CC_VERSION_TEXT="Android (8508608, based on r450784e) clang version 14.0.7 (https://android.googlesource.com/toolchain/llvm-project 4c603efb0cca074e9238af8b4106c30add4418f6)"
 CONFIG_GCC_VERSION=0
@@ -3737,10 +3737,7 @@ CONFIG_VIDEOBUF2_DMA_SG=y
 # Media ancillary drivers
 #
 CONFIG_VIDEO_IR_I2C=y
-
-#
-# Camera sensor devices
-#
+CONFIG_VIDEO_CAMERA_SENSOR=y
 # CONFIG_VIDEO_AR0521 is not set
 # CONFIG_VIDEO_ARDUCAM_64MP is not set
 # CONFIG_VIDEO_ARDUCAM_PIVARIETY is not set
@@ -3813,7 +3810,6 @@ CONFIG_VIDEO_OV5647=y
 # CONFIG_VIDEO_CCS is not set
 # CONFIG_VIDEO_ET8EK8 is not set
 # CONFIG_VIDEO_M5MOLS is not set
-# end of Camera sensor devices
 
 #
 # Lens drivers
