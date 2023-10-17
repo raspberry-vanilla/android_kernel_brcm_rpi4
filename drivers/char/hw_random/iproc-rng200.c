@@ -14,6 +14,7 @@
 #include <linux/module.h>
 #include <linux/of_address.h>
 #include <linux/of_platform.h>
+#include <linux/of.h>
 #include <linux/platform_device.h>
 #include <linux/delay.h>
 
@@ -250,7 +251,7 @@ static int iproc_rng200_probe(struct platform_device *pdev)
 
 	dev_set_drvdata(dev, priv);
 
-	priv->rng.name = "iproc-rng200";
+	priv->rng.name = pdev->name;
 	priv->rng.cleanup = iproc_rng200_cleanup;
 
 	if (of_device_is_compatible(dev->of_node, "brcm,bcm2711-rng200")) {
